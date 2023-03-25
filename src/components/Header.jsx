@@ -19,8 +19,7 @@ export default function Header() {
             className="h-10 text-bold cursor-pointer"
             src="https://thumbs.dreamstime.com/z/real-estate-logo-design-simple-172869139.jpg"
             alt="logo"
-
-             onClick={() => navigate("/")}
+            onClick={() => navigate("/")}
           />
         </div>
         <div className="hidden md:flex">

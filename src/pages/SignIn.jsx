@@ -1,8 +1,10 @@
 import { useState } from "react";
-import { useNavigate } from "react-router";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import OAuth from "../components/OAuth";
+import { signInWithEmailAndPassword, getAuth } from "firebase/auth";
+import { toast } from "react-toastify";
+import FAuth from "../components/FAuth";
 
 export default function SignIn() {
   const [showPassword, setShowPassword] = useState(false);
@@ -11,35 +13,50 @@ export default function SignIn() {
     password: "",
   });
   const { email, password } = formData;
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   function onChange(e) {
     setFormData((prevState) => ({
       ...prevState,
       [e.target.id]: e.target.value,
     }));
   }
+  async function onSubmit(e) {
+    e.preventDefault();
+    try {
+      const auth = getAuth();
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      if (userCredential.user) {
+        navigate("/");
+      }
+    } catch (error) {
+      toast.error("Bad user credentials");
+    }
+  }
   return (
     <section>
       <h1 className="text-3xl text-center mt-6 font-bold">Sign In</h1>
       <div className="flex justify-center flex-wrap items-center px-6 py-12 max-w-6xl mx-auto">
-        <div className="md:w-[67%] lg:w-[50%] mb-12 md:mb-6 pt-10">
+        <div className="md:w-[67%] lg:w-[50%] mb-12 md:mb-6">
           <img
-            src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8aG9tZSUyMGtleXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60"
+            src="https://images.unsplash.com/flagged/photo-1564767609342-620cb19b2357?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1373&q=80"
             alt="key"
             className="w-full rounded-2xl"
           />
         </div>
-        <div className=" w-full md:w-[67%] lg:w-[40%] lg:ml-20">
-          <form>
+        <div className="w-full md:w-[67%] lg:w-[40%] lg:ml-20">
+          <form onSubmit={onSubmit}>
             <input
               type="email"
               id="email"
               value={email}
               onChange={onChange}
               placeholder="Email address"
-              className="mb-6 w-full px-4 py-2 text-xl text-gray-700 bg-white border-gray-300 rounded transition ease-in-out placeholder-gray-300"
+              className="mb-6 w-full px-4 py-2 text-xl text-gray-700 bg-white border-gray-300 rounded transition ease-in-out"
             />
-
             <div className="relative mb-6">
               <input
                 type={showPassword ? "text" : "password"}
@@ -47,7 +64,7 @@ export default function SignIn() {
                 value={password}
                 onChange={onChange}
                 placeholder="Password"
-                className="w-full px-4 py-2 text-xl text-gray-700 bg-white border-gray-300 rounded transition placeholder-gray-300 ease-in-out"
+                className="w-full px-4 py-2 text-xl text-gray-700 bg-white border-gray-300 rounded transition ease-in-out"
               />
               {showPassword ? (
                 <AiFillEyeInvisible
@@ -81,7 +98,7 @@ export default function SignIn() {
               </p>
             </div>
             <button
-              className="w-full bg-blue-600 text-white px-7 py-3 text-sm font-medium uppercase rounded-3xl shadow-md hover:bg-blue-700 transition duration-150 ease-in-out hover:shadow-lg active:bg-blue-800"
+              className="w-full bg-red-600 text-white px-7 py-3 text-sm font-medium uppercase  shadow-md hover:bg-red-700 transition duration-150 ease-in-out hover:shadow-lg active:bg-red-800 rounded-3xl"
               type="submit"
             >
               Sign in
@@ -90,6 +107,7 @@ export default function SignIn() {
               <p className="text-center font-semibold mx-4">OR</p>
             </div>
             <OAuth />
+            <FAuth />
           </form>
         </div>
       </div>

@@ -11,6 +11,7 @@ import {
 import { db } from "../firebase";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
+import FAuth from "../components/FAuth";
 
 export default function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
@@ -84,7 +85,6 @@ export default function SignUp() {
               placeholder="Email address"
               className="mb-6 w-full px-4 py-2 text-xl text-gray-700 bg-white border-gray-300 rounded transition ease-in-out placeholder-gray-300"
             />
-
             <div className="relative mb-6">
               <input
                 type={showPassword ? "text" : "password"}
@@ -126,7 +126,7 @@ export default function SignUp() {
               </p>
             </div>
             <button
-              className="w-full bg-blue-600 text-white px-7 py-3 text-sm font-medium uppercase rounded-3xl shadow-md hover:bg-blue-700 transition duration-150 ease-in-out hover:shadow-lg active:bg-blue-800"
+              className="w-full bg-red-600 text-white px-7 py-3 text-sm font-medium uppercase rounded-3xl shadow-md hover:bg-red-700 transition duration-150 ease-in-out hover:shadow-lg active:bg-red-800 "
               type="submit"
             >
               Sign Up
@@ -135,6 +135,7 @@ export default function SignUp() {
               <p className="text-center font-semibold mx-4">OR</p>
             </div>
             <OAuth />
+            <FAuth />
           </form>
         </div>
       </div>
