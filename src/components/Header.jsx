@@ -16,8 +16,8 @@ export default function Header() {
       <header className="flex justify-between items-center px-3 max-w-6xl mx-auto">
         <div>
           <img
-            className="h-10 text-bold cursor-pointer"
-            src="https://thumbs.dreamstime.com/z/real-estate-logo-design-simple-172869139.jpg"
+            className="h-10 text-bold cursor-pointer p-0 my-0"
+            src="https://thumbs.dreamstime.com/z/real-estate-logo-design-simple-172869139.jpg width=300 height=300"
             alt="logo"
             onClick={() => navigate("/")}
           />
@@ -58,9 +58,9 @@ export default function Header() {
             </li>
             <li
               className={` cursor-pointer py-3 text-sm font-semibold text-gray-400 border-b-[3px] border-b-transparent ${
-                pathMatchRoute("/myhome") && "text-black border-b-red-500"
+                pathMatchRoute("/myHome") && "text-black border-b-red-500"
               }`}
-              onClick={() => navigate("/myhome")}
+              onClick={() => navigate("/myHome")}
             >
               My Home
             </li>

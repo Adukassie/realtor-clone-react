@@ -98,7 +98,7 @@ export default function SignIn() {
               </p>
             </div>
             <button
-              className="w-full bg-red-600 text-white px-7 py-3 text-sm font-medium uppercase  shadow-md hover:bg-red-700 transition duration-150 ease-in-out hover:shadow-lg active:bg-red-800 rounded-3xl"
+              className="w-full bg-red-600 text-white px-7 py-3 text-sm font-medium uppercase wq shadow-md hover:bg-red-700 transition duration-150 ease-in-out hover:shadow-lg active:bg-red-800 rounded-3xl"
               type="submit"
             >
               Sign in
