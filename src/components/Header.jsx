@@ -1,32 +1,33 @@
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router-dom";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 export default function Header() {
-   const [pageState, setPageState] = useState("Sign in");
+  const [pageState, setPageState] = useState("Sign in");
   const location = useLocation();
   const navigate = useNavigate();
-   const auth = getAuth();
-   useEffect(() => {
+  const auth = getAuth();
+  useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         setPageState("Profile");
       } else {
         setPageState("Sign in");
       }
-     });
-   }, [auth]);
+    });
+  }, [auth]);
   function pathMatchRoute(route) {
     if (route === location.pathname) {
       return true;
     }
   }
-  console.log(location.pathname);
   return (
     <div className="bg-white border-b shadow-sm sticky top-0 z-40">
       <header className="flex justify-between items-center px-3 max-w-6xl mx-auto">
         <div>
           <img
-            className="h-10 text-bold cursor-pointer p-0 my-0"
+            className={`h-10 text-bold cursor-pointer p-0 my-0 ${
+              pathMatchRoute("/") && "text-black border-b-red-500"
+            }`}
             src="https://thumbs.dreamstime.com/z/real-estate-logo-design-simple-172869139.jpg width=300 height=300"
             alt="logo"
             onClick={() => navigate("/")}

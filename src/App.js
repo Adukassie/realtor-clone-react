@@ -11,6 +11,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import MyHome from "./pages/MyHome";
 import Four04 from "./pages/Four04";
+import CreateListing from "./pages/CreateListing";
 function App() {
   return (
     <>
@@ -18,7 +19,7 @@ function App() {
         <Header />
         <Routes>
           <Route exact path="/" element={<Home />} />
-          <Route exact path="/my-home" element={<MyHome />} />
+          <Route exact path="/myhome" element={<MyHome />} />
           <Route path="/profile" element={<PrivateRoute />}>
             <Route path="/profile" element={<Profile />} />
           </Route>
@@ -26,6 +27,10 @@ function App() {
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/offers" element={<Offers />} />
+          <Route path="create-listing" element={<PrivateRoute />}>
+            <Route path="/create-listing" element={<CreateListing />} />
+          </Route>
+          <Route path="/create-listing" element={<CreateListing />} />
           <Route path="*" element={<Four04 />} />
         </Routes>
       </Router>
